@@ -27,8 +27,13 @@ $ npm install directory-contents-list --save
 We can get `/home/hastijs` contents by `directory-contents-list` module easily:
 
 ```js
-const options = {root: '/home/hastijs'};
-console.log(require('directory-contents-list')(options));
+const directoryContentsList = require('directory-contents-list');
+const options = {
+  root: '/home/hastijs'
+};
+directoryContentsList(options, (error, contents) => {
+  console.log(contents);
+});
 /*
 => [ '/home/hastijs/dir1',
      '/home/hastijs/dir2',
@@ -46,23 +51,29 @@ In all examples bellow the `/home/hastijs` directory is the same directory shown
 ### Filter directory contents by depth
 
 ```js
+const directoryContentsList = require('directory-contents-list');
 const options = {
   root: '/home/hastijs',
   depth: 2
 };
-console.log(require('directory-contents-list')(options));
+directoryContentsList(options, (error, contents) => {
+  console.log(contents);
+});
 // => [ '/home/hastijs/dir1/dir11/file1' ]
 ```
 
 ### Filter directory contents by depth and type
 
 ```js
+const directoryContentsList = require('directory-contents-list');
 const options = {
   root: '/home/hastijs',
   depth: [0, 1],
   type: 'directory'
 };
-console.log(require('directory-contents-list')(options));
+directoryContentsList(options, (error, contents) => {
+  console.log(contents);
+});
 /*
 => [ '/home/hastijs/dir1',
      '/home/hastijs/dir2',
@@ -74,12 +85,15 @@ console.log(require('directory-contents-list')(options));
 ### Search in directory contents and filter by type
 
 ```js
+const directoryContentsList = require('directory-contents-list');
 const options = {
   root: '/home/hastijs',
   type: ['file', 'symbolicLink'],
   find: /1$/
 };
-console.log(require('directory-contents-list')(options));
+directoryContentsList(options, (error, contents) => {
+  console.log(contents);
+});
 // => [ '/home/hastijs/dir1/dir11/file1' ]
 ```
 
